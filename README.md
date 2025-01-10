@@ -18,9 +18,8 @@ Motion-controllable image animation is a fundamental task with a wide range of p
 
 ## Demo Video
 
-<p align="center">
-<video src="assets/Perception-as-Control_480.mov" width="88%"></video>
-</p>
+<video src="https://www.youtube.com/watch?v=r2DszXAqbRE" width="88%"></video>
+
 
 More results can be found in [project page](https://chen-yingjie.github.io/projects/Perception-as-Control/index.html).
 

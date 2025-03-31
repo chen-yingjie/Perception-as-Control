@@ -10,7 +10,6 @@ from diffusers.models.attention import AdaLayerNorm, Attention, FeedForward
 
 from src.models.motion_module import zero_module
 from src.models.resnet import InflatedConv3d
-from .gated_self_attention import GatedSelfAttentionDense, SelfAttention
 
 
 class FusionModule(ModelMixin):

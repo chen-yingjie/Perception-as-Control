@@ -1,0 +1,62 @@
+base_model_path: './pretrained_weights/sd-image-variations-diffusers'
+vae_model_path: './pretrained_weights/sd-vae-ft-mse'
+image_encoder_path: './pretrained_weights/sd-image-variations-diffusers/image_encoder'
+mm_path: ''
+
+denoising_unet_path: ./pretrained_weights/denoising_unet.pth
+reference_unet_path: ./pretrained_weights/reference_unet.pth
+obj_encoder_path: ./pretrained_weights/obj_encoder.pth
+cam_encoder_path: ./pretrained_weights/cam_encoder.pth
+
+use_lora: false
+lora_rank: 64
+
+inference_config: "./configs/inference/inference_v2.yaml"
+weight_dtype: 'fp32'
+
+is_obj: true
+is_cam: true
+is_depth: true
+is_adapted: true
+fusion_type: 'max'
+is_pad: true
+
+W: 768
+H: 512
+circle_scale: 10
+
+sample_n_frames: 16
+sample_stride: 4
+guidance_scale: 3.5
+steps: 20
+seed: 12580
+
+save_dir: './outputs'
+
+sample_n_trajs: -1
+cam_only: false
+obj_only: false
+
+remove_tmp_results: true
+
+test_cases:
+
+  - "./examples/balloons.png":
+    - "./examples/balloons.json" 
+    - "./examples/Still.txt" 
+    - 12597
+
+  - "./examples/backview.jpeg":
+    - "./examples/backview.json" 
+    - "./examples/DollyOut.txt" 
+    - 12597
+
+  - "./examples/balloon.png":
+    - "./examples/balloon.json" 
+    - "./examples/TiltDown.txt" 
+    - 12580
+
+  - "./examples/bamboo.png":
+    - "./examples/bamboo.json" 
+    - "./examples/Still.txt" 
+    - 12587

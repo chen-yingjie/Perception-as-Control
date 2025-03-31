@@ -18,27 +18,109 @@ Official implementation of "Perception-as-Control: Fine-grained Controllable Ima
 Motion-controllable image animation is a fundamental task with a wide range of potential applications. Recent works have made progress in controlling camera or object motion via the same 2D motion representations or different control signals, while they still struggle in supporting collaborative camera and object motion control with adaptive control granularity. To this end, we introduce 3D-aware motion representation and propose an image animation framework, called Perception-as-Control, to achieve fine-grained collaborative motion control. Specifically, we construct 3D-aware motion representation from a reference image, manipulate it based on interpreted user intentions, and perceive it from different viewpoints. In this way, camera and object motions are transformed into intuitive, consistent visual changes. Then, the proposed framework leverages the perception results as motion control signals, enabling it to support various motion-related video synthesis tasks in a unified and flexible way. Experiments demonstrate the superiority of the proposed method.
 
 ## 🔥 Updates
-(2025-01-09) The project page, demo video and technical report are released. The full paper version with more details is in process.
+- (2025-03-31) We release the inference code and model weights of Perception-as-Control.
+- (2025-03-10) We update a new version of paper with more details.
+- (2025-01-09) The project page, demo video and technical report are released. The full paper version with more details is in process.
+
+## Usage
+### Environment
+```shell
+$ pip install -r requirements.txt
+```
+### Pretrained Weights
+1. Download [pretrained weights](https://drive.google.com/drive/folders/1ZncmHG9K_n1BjGhVzQemomWzxQ60bYqg?usp=drive_link) and put them in `$INSTALL_DIR/pretrained_weights`.
+
+2. Download pretrained weight of based models and put them in `$INSTALL_DIR/pretrained_weights`:
+  - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
+  - [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
+
+The pretrained weights are organized as follows:
+```text
+./pretrained_weights/
+|-- denoising_unet.pth
+|-- reference_unet.pth
+|-- cam_encoder.pth
+|-- obj_encoder.pth
+|-- sd-vae-ft-mse
+|   |-- ...
+|-- sd-image-variations-diffusers
+|   |-- ...
+```
+
+### Inference
+```shell
+$ python inference.py
+```
+The results will be saved in `$INSTALL_DIR/outputs`.
 
 ## 🎥 Demo 
 
-https://github.com/user-attachments/assets/1a11b5aa-4b36-4671-9beb-c7e9af634d36
+### Fine-grained collaborative motion control
+<table class="center">
+    
+<tr>
+    <p>Camera Motion Control</p>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/fb3aa7af-63dd-4cd1-a4a0-61dc95124b71" muted="false"></video>
+    </td>
+    <p>Object Motion Control</p>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/a5e6d1a0-8116-4815-b301-9c8cd0c0039f" muted="false"></video>
+    </td>
+    <p>Collaborative Motion Control</p>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/484d1324-9862-4ad8-87cb-47a5a173bcc6" muted="false"></video>
+    </td>
+</tr>
+
+<tr>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/14d73cc0-68ac-4f94-b239-b140f8cc3967" muted="false"></video>
+    </td>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/bec36750-309c-4f7c-85f4-fa18416ac09d" muted="false"></video>
+    </td>
+    <td width=33% style="border: none">
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/beb8f2be-3e6b-41a5-b605-1e7bda7902ff" muted="false"></video>
+    </td>
+</tr>
+
+</table>
 
 
-https://github.com/user-attachments/assets/5d7852d8-e5d0-4307-be94-c5e29f00bb3d
+### Potential applications
 
+<table class="center">
+    
+<tr>
+    <td width=50% style="border: none">
+      <p>Motion Generation</p>
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/cfc18a6a-d155-4b17-a9ec-5b72ca0610f6" muted="false"></video>
+    </td>
+    <td width=50% style="border: none">
+      <p>Motion Clone</p>
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/7434e8e6-4e3a-46c8-81b9-d0033f37dc77" muted="false"></video>
+    </td>
+</tr>
 
-https://github.com/user-attachments/assets/293a2255-5be5-487c-bd9e-22442cd21c80
+<tr>
+    <td width=50% style="border: none">
+      <p>Motion Transfer</p>
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/fc8fff49-686d-43dd-bbb5-9b3ff4a04621" muted="false"></video>
+    </td>
+    <td width=50% style="border: none">
+      <p>Motion Editing</p>
+      <video controls autoplay loop src="https://github.com/user-attachments/assets/f2bf7cd0-0d68-4f90-9e4d-5c5ce0165c21" muted="false"></video>
+    </td>
+</tr>
 
-
-https://github.com/user-attachments/assets/a4833c99-fc57-45b9-a99d-013fff8f647b
-
+</table>
 
 For more details, please refer to our [project page](https://chen-yingjie.github.io/projects/Perception-as-Control/index.html).
 
 
 ## 📑 TODO List
-  - [ ] Release inference code and checkpoints
+  - [x] Release inference code and model weights
   - [ ] Provide a Gradio demo
   - [ ] Release training code
 
@@ -54,3 +136,7 @@ If you find this code useful for your research, please use the following BibTeX 
   website={https://chen-yingjie.github.io/projects/Perception-as-Control/index.html},
   year={2025}}
 ```
+
+## Acknowledgements
+
+We would like to thank the contributors to [Moore-AnimateAnyone](https://github.com/MooreThreads/Moore-AnimateAnyone), [Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2), [SpaTracker](https://github.com/henry123-boy/SpaTracker), [Tartanvo](https://github.com/castacks/tartanvo), [diffusers](https://github.com/huggingface/diffusers) for their open research and exploration.

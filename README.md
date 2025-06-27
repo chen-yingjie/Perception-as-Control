@@ -11,7 +11,7 @@ Official implementation of "Perception-as-Control: Fine-grained Controllable Ima
 <p align="center">
 <a href="https://arxiv.org/abs/2501.05020"><img src="https://img.shields.io/badge/arXiv-Paper-<color>"></a>
 <a href="https://chen-yingjie.github.io/projects/Perception-as-Control/index.html"><img src="https://img.shields.io/badge/Project-Website-red"></a>
-<a href="https://www.youtube.com/embed/r2DszXAqbRE"><img src="https://img.shields.io/static/v1?label=Video&message=Video&color=orange"></a>
+<a href="https://www.youtube.com/embed/r2DszXAqbRE"><img src="https://img.shields.io/static/v1?label=Demo&message=Video&color=orange"></a>
 <a href="" target='_blank'>
 <img src="https://visitor-badge.laobi.icu/badge?page_id=TODO" />
 </a>

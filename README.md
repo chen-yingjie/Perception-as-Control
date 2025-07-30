@@ -41,7 +41,7 @@ Motion-controllable image animation is a fundamental task with a wide range of p
 $ pip install -r requirements.txt
 ```
 ### Pretrained Weights
-1. Download [pretrained weights](https://drive.google.com/drive/folders/1ZncmHG9K_n1BjGhVzQemomWzxQ60bYqg?usp=drive_link) and put them in `$INSTALL_DIR/pretrained_weights`.
+1. Download [pretrained weights](https://drive.google.com/drive/folders/1ZncmHG9K_n1BjGhVzQemomWzxQ60bYqg?usp=sharing) and put them in `$INSTALL_DIR/pretrained_weights`.
 
 2. Download pretrained weight of based models and put them in `$INSTALL_DIR/pretrained_weights`:
   - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)

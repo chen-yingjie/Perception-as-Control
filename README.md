@@ -34,6 +34,7 @@ Motion-controllable image animation is a fundamental task with a wide range of p
 ## 📑 TODO List
   - [x] Release inference code and model weights
   - [x] Provide a Gradio demo
+  - [ ] Release a DiT version
   - [ ] Release training code
 
 ## Usage

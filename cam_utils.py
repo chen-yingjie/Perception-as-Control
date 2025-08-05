@@ -308,6 +308,114 @@ def estimate_depth(imagepath, query_points, img_size, focal, output_dir):
     return points_3d, relative_points_depth
 
 
+def generate_vo(renderer, pattern_name):
+    RTs = []
+    if pattern_name == 'Still':
+        R, T = renderer.update_view(distance=5.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 5.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=5.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 5.0])
+        RTs.append((R, T))
+    elif pattern_name == 'Shaking':
+        R, T = renderer.update_view(distance=5.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 5.0])
+        RTs.append((R, T))
+        for idx in range(0, 8):
+            delta_x = random.randint(0, 1) // 3
+            pitch = random.randint(0, 1)
+            roll = random.randint(0, 1)
+            R, T = renderer.update_view(distance=1.0, pitch=pitch, azimuth=0.0, roll=roll, target_point=[delta_x, 0.0, 1.0])
+            RTs.append((R, T))
+    elif pattern_name == 'OrbitLeft':
+        for azimuth in np.linspace(0.0, -15.0, 8):
+            R, T = renderer.update_view(distance=3.0, pitch=0.0, azimuth=azimuth, roll=0.0, target_point=[0.0, 0.0, 3.0])
+            RTs.append((R, T))
+    elif pattern_name == 'OrbitRight':
+        for azimuth in np.linspace(0.0, 15.0, 8):
+            R, T = renderer.update_view(distance=3.0, pitch=0.0, azimuth=azimuth, roll=0.0, target_point=[0.0, 0.0, 3.0])
+            RTs.append((R, T))
+    elif pattern_name == 'OrbitUp':
+        for pitch in np.linspace(0.0, -15.0, 8):
+            R, T = renderer.update_view(distance=3.0, pitch=pitch, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 3.0])
+            RTs.append((R, T))
+    elif pattern_name == 'OrbitDown':
+        for pitch in np.linspace(0.0, 15.0, 8):
+            R, T = renderer.update_view(distance=3.0, pitch=pitch, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 3.0])
+            RTs.append((R, T))
+    elif pattern_name == 'TruckLeft':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.5, 0.0, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'TruckRight':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[-0.5, 0.0, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'PedestalUp':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.5, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'PedestalDown':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, -0.5, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'PanLeft':
+        ori_distance = 1.0
+        for azimuth in [0.0, 10.0]:
+            azimuth_rad = math.radians(azimuth)
+            distance = ori_distance * (1.0 / math.cos(azimuth_rad))
+            target_point = [ori_distance * math.tanh(azimuth_rad), 0.0, 1.0]
+            R, T = renderer.update_view(distance=distance, pitch=0.0, azimuth=azimuth, roll=0.0, target_point=target_point)
+            RTs.append((R, T))
+    elif pattern_name == 'PanRight':
+        ori_distance = 1.0
+        for azimuth in [0.0, -10.0]:
+            azimuth_rad = math.radians(azimuth)
+            distance = ori_distance * (1.0 / math.cos(azimuth_rad))
+            target_point = [ori_distance * math.tanh(azimuth_rad), 0.0, 1.0]
+            R, T = renderer.update_view(distance=distance, pitch=0.0, azimuth=azimuth, roll=0.0, target_point=target_point)
+            RTs.append((R, T))
+    elif pattern_name == 'TiltUp':
+        ori_distance = 1.0
+        for pitch in [0.0, 10.0]:
+            pitch_rad = math.radians(pitch)
+            distance = ori_distance * (1.0 / math.cos(pitch_rad))
+            target_point = [0.0, ori_distance * math.tanh(pitch_rad), 1.0]
+            R, T = renderer.update_view(distance=distance, pitch=pitch, azimuth=0.0, roll=0.0, target_point=target_point)
+            RTs.append((R, T))
+    elif pattern_name == 'TiltDown':
+        ori_distance = 1.0
+        for pitch in [0.0, -10.0]:
+            pitch_rad = math.radians(pitch)
+            distance = ori_distance * (1.0 / math.cos(pitch_rad))
+            target_point = [0.0, ori_distance * math.tanh(pitch_rad), 1.0]
+            R, T = renderer.update_view(distance=distance, pitch=pitch, azimuth=0.0, roll=0.0, target_point=target_point)
+            RTs.append((R, T))
+    elif pattern_name == 'ClockwiseRoll':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=20.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'AnticlockwiseRoll':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=-20.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+    elif pattern_name == 'DollyIn':
+        R, T = renderer.update_view(distance=10.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 10.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=9.5, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 10.0])
+        RTs.append((R, T))
+    elif pattern_name == 'DollyOut':
+        R, T = renderer.update_view(distance=1.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+        R, T = renderer.update_view(distance=2.0, pitch=0.0, azimuth=0.0, roll=0.0, target_point=[0.0, 0.0, 1.0])
+        RTs.append((R, T))
+
+    return RTs
+
+
 def cam_adaptation(imagepath, vo_path, query_path, cam_type, video_length, output_dir):
 
     os.makedirs(output_dir, exist_ok=True)
@@ -423,8 +531,7 @@ if __name__ == '__main__':
     
     if args.cam_type == 'generated':
         pattern_name = args.vo_path.split('/')[-1].split('.')[0]
-        # RTs = generate_vo(renderer_point, pattern_name)
-        raise NotImplementedError
+        RTs = generate_vo(renderer_point, pattern_name)
     else:
         camera_poses = np.loadtxt(args.vo_path).reshape(-1, 3, 4)
         RTs = [(pose[:, :3], pose[:, 3]) for pose in camera_poses]

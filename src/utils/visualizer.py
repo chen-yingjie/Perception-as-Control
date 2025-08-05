@@ -329,8 +329,11 @@ class Visualizer:
         #  draw points
         for t in range(T):
             img = Image.fromarray(np.uint8(res_video[t]))
-            indices = np.argsort(depths[t])
-            coords, depth, pcolors = tracks[t][indices], depths[t][indices], vector_colors[t][indices]
+            if tracks[t].shape[0] > 1:
+                indices = np.argsort(depths[t])
+                coords, depth, pcolors = tracks[t][indices], depths[t][indices], vector_colors[t][indices]
+            else:
+                coords, depth, pcolors = tracks[t], depths[t], vector_colors[t]
             for i in range(N):
                 # coord = (tracks[t, i, 0], tracks[t, i, 1])
                 coord = (coords[i, 0], coords[i, 1])

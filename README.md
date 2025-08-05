@@ -25,6 +25,7 @@ Official implementation of "Perception-as-Control: Fine-grained Controllable Ima
 Motion-controllable image animation is a fundamental task with a wide range of potential applications. Recent works have made progress in controlling camera or object motion via the same 2D motion representations or different control signals, while they still struggle in supporting collaborative camera and object motion control with adaptive control granularity. To this end, we introduce 3D-aware motion representation and propose an image animation framework, called Perception-as-Control, to achieve fine-grained collaborative motion control. Specifically, we construct 3D-aware motion representation from a reference image, manipulate it based on interpreted user intentions, and perceive it from different viewpoints. In this way, camera and object motions are transformed into intuitive, consistent visual changes. Then, the proposed framework leverages the perception results as motion control signals, enabling it to support various motion-related video synthesis tasks in a unified and flexible way. Experiments demonstrate the superiority of the proposed method.
 
 ## 🔥 Updates
+- (2025-08-04) A gradio demo is released.
 - (2025-06-27) Our work has been accepted by ICCV 2025 🎉🎉🎉.
 - (2025-03-31) We release the inference code and model weights of Perception-as-Control.
 - (2025-03-10) We update a new version of paper with more details.
@@ -32,7 +33,7 @@ Motion-controllable image animation is a fundamental task with a wide range of p
 
 ## 📑 TODO List
   - [x] Release inference code and model weights
-  - [ ] Provide a Gradio demo
+  - [x] Provide a Gradio demo
   - [ ] Release training code
 
 ## Usage

@@ -67,6 +67,11 @@ $ python inference.py
 ```
 The results will be saved in `$INSTALL_DIR/outputs`.
 
+### Run Gradio Demo
+```shell
+$ python run_gradio.py
+```
+
 ## 🎥 Demo 
 
 ### Fine-grained collaborative motion control
